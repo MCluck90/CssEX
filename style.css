@@ -1,0 +1,85 @@
+body {
+    font-family: 'Droid Sans', sans-serif;
+    color: #DDD;
+    background-color: #222;
+    margin: 0;
+    padding: 0;
+}
+#container {
+    margin: 0 auto;
+    width: 970px;
+}
+#header > ul {
+    display: block;
+    height: 79px;
+    line-height: 79px;
+    list-style: none;
+    font-size: 24px;
+    margin: 0;
+    padding: 0;
+}
+#header > ul li {
+    text-align: center;
+    float: left;
+    width: 25%;
+}
+#header > ul li:first-child a {
+    border-bottom-left-radius: 20px;
+    border-left-width: 0;
+}
+#header > ul li:last-child a {
+    border-bottom-right-radius: 20px;
+    border-right-width: 0;
+}
+#header > ul li:last-child {
+    display: inline-block;
+    float: none;
+}
+#header > ul li:last-child:after {
+    clear: left;
+}
+#header > ul li a {
+    display: inline-block;
+    background-color: #EEE;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: #000;
+    border-left: solid 1px #AAA;
+    border-right: solid 1px #AAA;
+    border-bottom-left-radius: 15px 5px;
+    border-bottom-right-radius: 15px 5px;
+}
+#header > ul li a:hover {
+    background-color: #AAA;
+    color: #EEE;
+}
+#content {
+}
+#content > span {
+    display: block;
+    width: 48%;
+    height: 140px;
+    padding: 4px;
+    float: left;
+    border: solid 1px #000;
+}
+#content > span:last-of-type:after {
+    float: none;
+    clear: left;
+}
+#content .example {
+    font-size: 15px;
+}
+#content .example > span {
+    display: block;
+    text-align: center;
+    font-size: 17px;
+    background-color: #000;
+}
+#content .example > div {
+    margin-bottom: 16px;
+}
+#content .example .new-format {
+    margin-bottom: 0;
+}
