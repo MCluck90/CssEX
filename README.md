@@ -2,21 +2,22 @@ CSS-Scoper
 ==========
 
 Ever get tired of having to write ever expanding CSS selectors? Especially when everything
-else in software development uses the idea of scoping? This will allow you to write CSS in a more readable
+else in software development uses the idea of scoping? Ever wanted to use variables? This will allow you to write CSS in a more readable
 fashion then translate it to valid CSS.
 
 Example:
 (Before)
 ```css
+$red = #F00;
 #container {
-		color: #F00;
-		.subClass {
+		color: $red;
+		.subClass: {
 			color: #00F;
 		}
-		> p {
+		> p: {
 			color: #0F0;
 			:hover: {
-				color: #0FF;
+				color: $red;
 			}
 		}
 }
@@ -26,5 +27,5 @@ Example:
 #container { color: #F00; }
 #container .subClass { color: #00F; }
 #container > p { color: #0F0; }
-#container > p:hover { color: #0FF; }
+#container > p:hover { color: #F00; }
 ```

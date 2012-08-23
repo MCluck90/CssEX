@@ -149,6 +149,12 @@ class CSS_Scoper
 		return $css;
 	}
 	
+	/**
+	 * Helper function for setting the value of a CSS variable
+	 * 
+	 * @access private
+	 * @param  string	Expression which sets the value
+	 */
 	private function setVariable($varString)
 	{
 		$assignment = explode("=", $varString);
