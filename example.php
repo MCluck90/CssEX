@@ -110,7 +110,37 @@
 				</div>
 				
 				<div class="example">
-					<p></p>
+					<p>What about those times when you've got to use the same color in multiple places
+					   and then you decide you want to do a different pallete?
+					</p>
+					
+					<span>HTML</span>
+					<script type="syntaxhighlighter" class="brush: js; html-script: true"><![CDATA[
+						<h1>A Red Header</h1>
+						<p>A Red Paragraph</p>
+						<span>A Red Span</span>
+					]]></script>
+					
+					<span>CSS</span>
+					<pre class="brush: css">
+						h1 { color: #F00; }
+						p { color: #F00; }
+						span { color: #F00; }
+					</pre>
+					
+					<p>Rather than have to dig through and find all the cases of red that need changed,
+					   while leaving the stuff that should be red alone, we can just change one variable.
+					</p>
+					
+					<div class="new-format">
+						<pre class="brush: css">
+							$themeColor = #F00;
+							
+							h1 { color: $themeColor; }
+							p { color: $themeColor; }
+							span { color: $themeColor; }
+						</pre>
+					</div>
 				</div>
 				
 				<div class="example">

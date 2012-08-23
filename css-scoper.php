@@ -53,6 +53,9 @@ class CSS_Scoper
 	// The tree of CSS selectors => rules
 	private $cssTree;
 	
+	// Variables inside the CSS code
+	private $variables;
+	
 	// The current selector
 	private $selector;
 	
@@ -75,6 +78,7 @@ class CSS_Scoper
 		
 		// Initialize the tree of rule and the active selector
 		$this->cssTree = array();
+		$this->variables = array();
 		$this->selector = "";
 		
 		$cssFile = @fopen($filePath, "r");
@@ -90,6 +94,9 @@ class CSS_Scoper
 			if ($char == "{") {
 				$this->selector = trim($this->selector);
 				$this->startScope($cssFile);
+				$this->selector = "";
+			} else if ($char == ";" && strrpos($this->selector, "$") !== FALSE) {
+				$this->setVariable($this->selector);
 				$this->selector = "";
 			} else {
 				$this->selector .= $char;
@@ -142,6 +149,15 @@ class CSS_Scoper
 		return $css;
 	}
 	
+	private function setVariable($varString)
+	{
+		$assignment = explode("=", $varString);
+		$assignment[0] = trim($assignment[0]);
+		$assignment[1] = trim($assignment[1]);
+		
+		$this->variables[$assignment[0]] = $assignment[1];
+	}
+	
 	/**
 	 * Helper function for generating CSS
 	 * 
@@ -182,6 +198,19 @@ class CSS_Scoper
 					
 				// Save the rule for the current selector
 				case ";":
+					if (strrpos($rule, "$") !== FALSE) {
+						if (strrpos($rule, "=") !== FALSE) {
+							$this->setVariable($rule);
+							$rule = "";
+							break;
+						} else {
+							$variable = substr($rule, strrpos($rule, "$"), strlen($rule) - strrpos($rule, "$"));
+							if (isset($this->variables[$variable])) {
+								$rule = str_replace($variable, $this->variables[$variable], $rule);
+							}
+						}
+					}
+					
 					$rulePair = explode(":", $rule);
 					$rule = trim($rulePair[0]);
 					$value = trim($rulePair[1]);
