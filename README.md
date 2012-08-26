@@ -11,12 +11,12 @@ Example:
 $red = #F00;
 #container {
 		color: $red;
-		.subClass: {
+		.subClass {
 			color: #00F;
 		}
-		> p: {
+		> p {
 			color: #0F0;
-			:hover: {
+			:hover {
 				color: $red;
 			}
 		}

@@ -190,7 +190,8 @@ class CSS_Scoper
 				case "{":
 					// Clip off any extra spaces and the additional ':' at the end
 					$rule = trim($rule);
-					$rule = substr($rule, 0, strlen($rule) - 1);
+					if ($rule[strlen($rule) - 1] == ":")
+						$rule = substr($rule, 0, strlen($rule) - 1);
 					
 					// If it's not a pseudo-selector, add a space
 					if ($rule[0] !== ":")
