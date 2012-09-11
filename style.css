@@ -54,8 +54,6 @@ body {
     background-color: #AAA;
     color: #EEE;
 }
-#content {
-}
 #content > span {
     display: block;
     width: 48%;

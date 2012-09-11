@@ -67,8 +67,9 @@ class CSS_Scoper
 	 * 
 	 * @access public
 	 * @param string 	Path to the CSS file
+	 * @param bool		If true, empty CSS rules will be removed
 	 */
-	public function __construct($filePath)
+	public function __construct($filePath, $removeEmpty = TRUE)
 	{
 		// If the file doesn't exist, warn the programmer that the file doesn't exist
 		if (!file_exists($filePath)) {
@@ -100,6 +101,16 @@ class CSS_Scoper
 				$this->selector = "";
 			} else {
 				$this->selector .= $char;
+			}
+		}
+		
+		// Clear out empty rules
+		if ($removeEmpty) {
+			$keys = array_keys($this->cssTree);
+			
+			foreach($keys as $key) {
+				if (count($this->cssTree[$key]) == 0)
+					unset($this->cssTree[$key]);
 			}
 		}
 	}
