@@ -90,6 +90,19 @@ class CSS_Scoper
 			// Ignore whitespace
 			if (strlen($this->selector) == 0 && preg_match(self::$whitespace, $char))
 				continue;
+			else if ($this->selector == "/*") {
+				// Ignore comments
+				while ($this->selector !== "*/") {
+					$this->selector = substr($this->selector, 1);
+					$this->selector .= fgetc($cssFile);
+				}
+				
+				$this->selector = "";
+				$char = fgetc($file);
+				
+				if (preg_match(self::$whitespace, $char))
+					continue;
+			}
 			
 			// Once we find a {, begin a new CSS scope
 			if ($char == "{") {
@@ -195,6 +208,19 @@ class CSS_Scoper
 			// Ignore whitespace
 			if (strlen($rule) == 0 && preg_match(self::$whitespace, $char))
 				continue;
+			else if ($rule == "/*") {
+				// Ignore comments
+				while ($rule !== "*/") {
+					$rule = substr($rule, 1);
+					$rule .= fgetc($file);
+				}
+				
+				$rule = "";
+				$char = fgetc($file);
+				
+				if (preg_match(self::$whitespace, $char))
+					continue;
+			}
 			
 			switch ($char) {
 				// Start up a new scoping
@@ -246,7 +272,10 @@ class CSS_Scoper
 		$lastChar = ($pseudoSelector) ? ":" : " ";
 		$this->selector = trim(substr($this->selector, 0, strrpos($this->selector, $lastChar)));
 		
-		$endOfSelector = $this->selector[strlen($this->selector) - 1];
+		// If there's a special end on the selector, split it off
+		$endOfSelector = "";
+		if(strlen($this->selector) > 0)
+			$endOfSelector = $this->selector[strlen($this->selector) - 1];
 		if ($endOfSelector == "+" || $endOfSelector == ">")
 			$this->selector = substr($this->selector, 0, strlen($this->selector) - 2);
 	}
