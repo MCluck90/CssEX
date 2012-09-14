@@ -22,7 +22,7 @@
 
 
 /**
- * CSS Scoper
+ * CssEX
  * Ever get tired of having to write ever expanding CSS selectors? Especially when everything
  * else in software development uses the idea of scoping? This will allow you to write CSS in a more readable
  * fashion then translate it to valid CSS.
@@ -48,7 +48,7 @@
  * #container > p { color: #0F0; }
  * #container > p:hover { color: #0FF; }
  */
-class CSS_Scoper
+class CssEX
 {
 	// The tree of CSS selectors => rules
 	private $cssTree;
