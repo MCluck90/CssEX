@@ -1,4 +1,4 @@
-CSS-Scoper
+CssEX
 ==========
 
 Ever get tired of having to write ever expanding CSS selectors? Especially when everything
